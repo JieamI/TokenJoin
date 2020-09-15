@@ -1,5 +1,4 @@
-FROM python:3.8
-COPY . /root
-WORKDIR /root
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
+COPY ./backend /app
 RUN pip install -r requirements.txt
 EXPOSE 8000
