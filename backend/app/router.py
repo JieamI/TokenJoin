@@ -9,78 +9,13 @@ from . import app
 from depends import *
 import utils
 import datetime
-
 import random
 import uuid
 
 # 数据库测试
 @app.get('/test')
 def test(db: Session = Depends(get_db)):
-    return 'dwadwa'
-
-@app.get('/recv')
-def recv(db: Session = Depends(get_db)):
-    # models.CVinfo.__table__.drop(engine)
-    # models.CVinfo.__table__.create(engine)
-    # department_lis = ['技术部', '设计部', '产品部', '产品运营', '新媒体运营', '人力资源部', '杂志部']
-    # nick_lis = ['Jie', 'Jane', 'Lucy', 'John', 'Mike', 'Lihua', 'Sarah', 'Amy']
-    # for i in range(0,10):
-    #     a = models.CVinfo(
-    #         department = random.choice(department_lis), 
-    #         sno = str(uuid.uuid4()), 
-    #         name = random.choice(nick_lis),
-    #         sex = random.choice(['男', '女']),
-    #         birthday = '2000年8月4日',
-    #         hometown = '广东东莞',
-    #         nation = '汉族',
-    #         college = '信息学院',
-    #         grade = '2020',
-    #         proclass = '电信2008',
-    #         mail = '1732615826@qq.com')
-    #     db.add(a)
-    # db.commit()
-    days = [i for i in range(0, 31)]
-    months = [8, 9, 10, 11, 12]
-    hours = [i for i in range(0, 24)]
-    minutes = [i for i in range(0, 60)]
-    seconds = [i for i in range(0, 60)]
-    cv_lis = db.query(models.CVinfo).all()
-    for cv in cv_lis:
-        time = datetime.datetime(2020, random.choice(months), random.choice(days), random.choice(hours), random.choice(minutes), random.choice(seconds))
-        cv.time = time.strftime('%Y-%m-%d %H:%M:%S')
-    db.commit()
-    return
-
-# 重置数据库
-@app.get('/refresh')
-async def refreshDb(db: Session = Depends(get_db)):
-    # 重置部门表
-    models.Department.__table__.drop(engine)
-    models.Department.__table__.create(engine)
-    department_lis = ['技术部', '设计部', '产品部', '产品运营', '新媒体运营', '人力资源部', '杂志部']
-    for each in department_lis:
-        depart = models.Department(Name = each)
-        db.add(depart)
-    # 重置用户表
-    models.User.__table__.drop(engine)
-    models.User.__table__.create(engine)
-    nick_lis = ['Jie', 'Jane', 'Lucy', 'John', 'Mike', 'Lihua', 'Sarah', 'Amy']
-    auth_lis = [True, False]
-    for i in range(0, 10):
-        user = models.User(
-            Nick = random.choice(nick_lis), 
-            Openid = str(uuid.uuid4()), 
-            Department_name = random.choice(department_lis),
-            Authorized = random.choice(auth_lis))
-        db.add(user)
-    # 重置记录表
-    models.Record.__table__.drop(engine)
-    models.Record.__table__.create(engine)
-    # for i in range(0, 10):
-    #     record = models.Record(Owner = random.choice(department_lis), Operator = random.choice(nick_lis), Operation = 'undefined')
-    #     db.add(record)
-    db.commit()
-    return
+    return 'ok'
 
 # -------------------------登录/申请处理路由------------------------------------
 
