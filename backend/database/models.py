@@ -82,7 +82,7 @@ class CVinfo(Base):
     dormitory = Column(String(160))
     phone = Column(String(160))
     qq = Column(String(160))
-    mail = Column(String(160)
+    mail = Column(String(160))
     experience = Column(Text)
     introduce = Column(Text)
     reason = Column(Text)
