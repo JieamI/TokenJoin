@@ -348,6 +348,8 @@ def handleJoin(
             db.commit()
             return {'code': 0}
     try:
+        # 默认填写comment， mysql 不支持在 text/blob 类型设置 default value
+    	cv.dict()["comment"] = "{}"
         obj = models.CVinfo(**cv.dict())
         db.add(obj)
         db.commit()
