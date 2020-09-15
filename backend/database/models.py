@@ -10,8 +10,8 @@ class User(Base):
     __tablename__ = 'user'
     
     id = Column(Integer, primary_key = True)
-    Nick = Column(String)
-    Openid = Column(String, unique = True, nullable = False, index = True)
+    Nick = Column(String(160))
+    Openid = Column(String(160), unique = True, nullable = False, index = True)
     Department_name = Column(Enum(
         '技术部', '设计部', '产品部', '产品运营', '新媒体运营', '人力资源部', '杂志部'
         ), 
@@ -31,7 +31,7 @@ class Department(Base):
         unique = True, 
         primary_key = True)
     Show = Column(Boolean, default = True)
-    Message = Column(String, server_default = '[]')
+    Message = Column(String(160), server_default = '[]')
 
 # 管理员操作记录，用于记录管理员同意拒绝申请，更改面试状态，及发送邮件等操作
 class Record(Base):
@@ -43,9 +43,9 @@ class Record(Base):
         ), 
         ForeignKey('department.Name'), 
         nullable = False, index = True)
-    Operator = Column(String)
-    Operation = Column(String)
-    Time = Column(String, default = set_time)
+    Operator = Column(String(160))
+    Operation = Column(String(160))
+    Time = Column(String(160), default = set_time)
 
     # 通过类属性规定查询对象以时间降序
     __mapper_args__ = {
@@ -59,7 +59,7 @@ class CVinfo(Base):
     __tablename__ = 'cvinfo'
 
     sno = Column(
-        String, 
+        String(64), 
         unique = True, 
         primary_key = True, 
         index = True, 
@@ -71,23 +71,23 @@ class CVinfo(Base):
         nullable = False)
     sign = Column(Boolean, default = False)
     state = Column(Enum('未审核', '简历通过', '笔试完成', '面试完成', '已录取', '未录取'), default = '未审核')
-    name = Column(String)
+    name = Column(String(160))
     sex = Column(Enum('男', '女'))
-    birthday = Column(String)
-    hometown = Column(String)
-    nation = Column(String)
-    college = Column(String)
-    grade = Column(String)
-    proclass = Column(String)
-    dormitory = Column(String)
-    phone = Column(String)
-    qq = Column(String)
-    mail = Column(String)
+    birthday = Column(String(160))
+    hometown = Column(String(160))
+    nation = Column(String(160))
+    college = Column(String(160))
+    grade = Column(String(160))
+    proclass = Column(String(160))
+    dormitory = Column(String(160))
+    phone = Column(String(160))
+    qq = Column(String(160))
+    mail = Column(String(160)
     experience = Column(Text)
     introduce = Column(Text)
     reason = Column(Text)
     comment = Column(Text, server_default = '{}')
-    time = Column(String, default = set_time)
+    time = Column(String(160), default = set_time)
        
     # 通过类属性规定查询对象以时间降序
     __mapper_args__ = {
