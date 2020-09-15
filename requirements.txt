@@ -3,6 +3,7 @@ uvicorn
 sqlalchemy
 python-multipart
 pydantic
+pymysql
 aiosmtplib
 requests
 jwt
