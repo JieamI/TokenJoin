@@ -6,4 +6,4 @@ pydantic
 pymysql
 aiosmtplib
 requests
-jwt
+pyjwt
