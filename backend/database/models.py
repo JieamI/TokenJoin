@@ -86,7 +86,7 @@ class CVinfo(Base):
     experience = Column(Text)
     introduce = Column(Text)
     reason = Column(Text)
-    comment = Column(Text, server_default = '{}')
+    comment = Column(Text)
     time = Column(String(160), default = set_time)
        
     # 通过类属性规定查询对象以时间降序
