@@ -90,7 +90,6 @@
             document.querySelector('#main').setAttribute('style', 'overflow: hidden; height: 100vh;')
              // 判断页面是否加载完成
             this.timer = setInterval(() => {
-                console.log(document.readyState)
                 if (document.readyState === 'complete') {
                     document.querySelector('#main').setAttribute('style', 'overflow: auto; height: auto')
                     this.loading = false
