@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-loading="loading">
 		<!-- 将团队部分和部门介绍部分分开是为了只给部门介绍添加立即加入按钮 -->
 		<!-- 团队介绍部分 -->
 		<v-touch
@@ -25,7 +25,7 @@
 			:key="(index + 2)" 
 			@swipeup="handleSwipeup(index + 2)" 
 			@swipedown="handleSwipedown(index + 2)">
-			<el-image :src="image.src" class="image"></el-image>
+			<el-image :src="image" class="image"></el-image>
 			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)"></el-image>
 		</v-touch>
 		<div id="icon-group">
@@ -38,18 +38,12 @@
 <script>
 	import image_0 from '../../assets/token.jpg'
 	import image_1 from '../../assets/时间线.jpg'
-	import image_2 from '../../assets/产品部.jpg'
-	import image_3 from '../../assets/技术部.jpg'
-	import image_4 from '../../assets/人力资源部.jpg'
-	import image_5 from '../../assets/设计部.jpg'
-	import image_6 from '../../assets/新媒体运营.jpg'
-	import image_7 from '../../assets/产品运营.jpg'
-	import image_8 from '../../assets/杂志部.jpg'
 	import image_join from '../../assets/加入.png'
 	import request from '../../utils/requests.js'
 	export default {
 		data() {
 			return {
+                loading: true,
 				timeout: null,
 				image_introduce: [image_0, image_1],
 				image_join: image_join,
@@ -57,6 +51,7 @@
 			}
 		},
 		async created() {
+            console.log(this.image_introduce)
 			// 如果使用电脑端打开则使网页以移动端的表现形式显示,以避免图片适配问题
 			let width = screen.width
 			if(width >= 750) {
@@ -68,37 +63,27 @@
 				methods: 'get',
 			})
 			if(res.data.showingList.length) {
-				let imgList = [{
-					src: image_2, name: '产品部'
-					}, {
-					src: image_3, name: '技术部'
-					}, {
-					src: image_4, name: '人力资源部'
-					}, {
-					src: image_5, name: '设计部'
-					}, {
-					src: image_6, name: '新媒体运营'
-					}, {
-					src: image_7, name: '产品运营'
-					}, {
-					src: image_8, name: '杂志部'
-					}]
-				res.data.showingList.forEach((dept) => {			
-						imgList.forEach((img) => {
-							if(img.name === dept) {
-								this.imageList.push(img)
-							}
-						})
-				})
-				return
-			}
-			// 没有一个部门处于展示状态
-			this.$message({
-				message: '当前没有部门在招新哦~',
-				type: 'warning',
-				center: true,
-				duration: 5000
-			})
+                res.data.showingList.forEach((dept) => {
+                    switch(dept) {
+                        case('技术部'): this.imageList.push(require('../../assets/技术部.jpg'));break;
+                        case('产品部'): this.imageList.push(require('../../assets/产品部.jpg'));break;
+                        case('人力资源部'): this.imageList.push(require('../../assets/人力资源部.jpg'));break;
+                        case('设计部'): this.imageList.push(require('../../assets/设计部.jpg'));break;
+                        case('新媒体运营'): this.imageList.push(require('../../assets/新媒体运营.jpg'));break;
+                        case('产品运营'): this.imageList.push(require('../../assets/产品运营.jpg'));break;
+                        case('杂志部'): this.imageList.push(require('../../assets/杂志部.jpg'));break;
+                    }
+                })
+			}else {
+                // 没有一个部门处于展示状态
+                this.$message({
+                    message: '当前没有部门在招新哦~',
+                    type: 'warning',
+                    center: true,
+                    duration: 5000
+                })
+            }
+            this.loading = false	
 		},
 		methods: {
 			handleSwipeup(index) {

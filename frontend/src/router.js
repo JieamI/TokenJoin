@@ -9,47 +9,48 @@ VueRouter.prototype.push = function(location) {
 
 Vue.use(VueRouter)
 
+
 let router =  new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes: [{
 		path: '/login',
-		component: () => import(/* webpackChunkName: "login" */ './views/login.vue')
+        component: () => import(/* webpackChunkName: "login" */ './views/login.vue')
 	},{
 		path: '/apply',
-		component: () => import(/* webpackChunkName: "apply" */ './views/apply.vue')
+        component: () => import(/* webpackChunkName: "apply" */ './views/apply.vue')
 	},{
 		path: '/superadmin',
-		component: () => import(/* webpackChunkName: "admin" */ './views/superadmin.vue')
+        component: () => import(/* webpackChunkName: "superadmin" */ './views/superadmin.vue')
 	},{
 		path: '/join/index',
-		component: () => import(/* webpackChunkName: "join" */ './components/join/index')
+        component: () => import(/* webpackChunkName: "join" */ './components/join/index')
 	},{
 		path: '/join/apply/:dept?',
-		component: () => import(/* webpackChunkName: "join" */ './views/join.vue'),
+        component: () => import(/* webpackChunkName: "join" */ './views/join.vue'),
 		props: true
 	},{
 		path: '/join*',
 		redirect: '/join/index'
 	},{
 		path: '/admin',
-		component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
+        component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
 		redirect: '/admin/cvadmin',
 		children: [{
 			path: 'setting',
-			component: () => import(/* webpackChunkName: "admin" */ './components/admin/setting.vue')
+            component: resolve => require(['./components/admin/setting.vue'], resolve)
 		},{
 			path: 'index',
-			component: () => import(/* webpackChunkName: "admin" */ './components/admin/index.vue')
+            component: resolve => require(['./components/admin/index.vue'], resolve)
 		},{
 			path: 'cvadmin',
-			component: () => import(/* webpackChunkName: "admin" */ './components/admin/cvadmin.vue')
+            component: resolve => require(['./components/admin/cvadmin.vue'], resolve)
 		},{
 			path: 'tpadmin',
-			component: () => import(/* webpackChunkName: "admin" */ './components/admin/tpadmin.vue')
+            component: resolve => require(['./components/admin/tpadmin.vue'], resolve)
 		},{
 			path: 'record',
-			component: () => import(/* webpackChunkName: "admin" */ './components/admin/record.vue')
+            component: resolve => require(['./components/admin/record.vue'], resolve)
 		}
 		]},{
 		path: '/admin/*',
