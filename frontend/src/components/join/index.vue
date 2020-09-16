@@ -43,8 +43,11 @@
 	export default {
 		data() {
 			return {
-                loading: false,
-				timeout: null,
+                loading: true,
+                // 用于定时下拉箭头提示
+                timeout: null,
+                // 用于判断页面是否加载完成
+                timer: null,
 				image_introduce: [image_0, image_1],
 				image_join: image_join,
 				imageList: []
@@ -55,7 +58,15 @@
 			let width = screen.width
 			if(width >= 750) {
 				document.querySelector('body').setAttribute('style', 'margin: auto; max-width: 375px;')
-			}
+            }
+            // 判断页面是否加载完成
+            this.timer = setInterval(() => {
+                console.log(document.readyState)
+                if (document.readyState === 'complete') {
+                    this.loading = false
+                    window.clearInterval(this.timer)
+                }
+            }, 1000)
 			// 获取各个部门的展示状态,有选择性地展示各个部门
 			let res = await request({
 				url: '/getshow',
@@ -82,11 +93,6 @@
                     duration: 5000
                 })
             }
-        },
-        mounted() {
-            this.$nextTick(function () {
-                console.log(this.imageList)
-            })
         },
 		methods: {
 			handleSwipeup(index) {
