@@ -25,8 +25,8 @@
 			:key="(index + 2)" 
 			@swipeup="handleSwipeup(index + 2)" 
 			@swipedown="handleSwipedown(index + 2)">
-			<el-image :src="image" class="image"></el-image>
-			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)"></el-image>
+			<el-image :src="image" class="image" lazy></el-image>
+			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)" lazy></el-image>
 		</v-touch>
 		<div id="icon-group">
 			<i class="el-icon-arrow-down"></i>
@@ -43,7 +43,7 @@
 	export default {
 		data() {
 			return {
-                loading: true,
+                loading: false,
 				timeout: null,
 				image_introduce: [image_0, image_1],
 				image_join: image_join,
@@ -51,7 +51,6 @@
 			}
 		},
 		async created() {
-            console.log(this.image_introduce)
 			// 如果使用电脑端打开则使网页以移动端的表现形式显示,以避免图片适配问题
 			let width = screen.width
 			if(width >= 750) {
@@ -83,8 +82,12 @@
                     duration: 5000
                 })
             }
-            this.loading = false	
-		},
+        },
+        mounted() {
+            this.$nextTick(function () {
+                console.log(this.imageList)
+            })
+        },
 		methods: {
 			handleSwipeup(index) {
 				if(index === this.imageList.length + 1) {
