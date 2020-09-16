@@ -1,5 +1,5 @@
 <template>
-	<div v-loading="loading">
+	<div v-loading="loading" id="main">
 		<!-- 将团队部分和部门介绍部分分开是为了只给部门介绍添加立即加入按钮 -->
 		<!-- 团队介绍部分 -->
 		<v-touch
@@ -54,19 +54,11 @@
 			}
 		},
 		async created() {
-			// 如果使用电脑端打开则使网页以移动端的表现形式显示,以避免图片适配问题
+            // 如果使用电脑端打开则使网页以移动端的表现形式显示,以避免图片适配问题
 			let width = screen.width
 			if(width >= 750) {
 				document.querySelector('body').setAttribute('style', 'margin: auto; max-width: 375px;')
             }
-            // 判断页面是否加载完成
-            this.timer = setInterval(() => {
-                console.log(document.readyState)
-                if (document.readyState === 'complete') {
-                    this.loading = false
-                    window.clearInterval(this.timer)
-                }
-            }, 1000)
 			// 获取各个部门的展示状态,有选择性地展示各个部门
 			let res = await request({
 				url: '/getshow',
@@ -93,6 +85,18 @@
                     duration: 5000
                 })
             }
+        },
+        mounted() {
+            document.querySelector('#main').setAttribute('style', 'overflow: hidden; height: 100vh;')
+             // 判断页面是否加载完成
+            this.timer = setInterval(() => {
+                console.log(document.readyState)
+                if (document.readyState === 'complete') {
+                    document.querySelector('#main').setAttribute('style', 'overflow: auto; height: auto')
+                    this.loading = false
+                    window.clearInterval(this.timer)
+                }
+            }, 1000)
         },
 		methods: {
 			handleSwipeup(index) {
