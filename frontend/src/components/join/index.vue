@@ -25,8 +25,8 @@
 			:key="(index + 2)" 
 			@swipeup="handleSwipeup(index + 2)" 
 			@swipedown="handleSwipedown(index + 2)">
-			<el-image :src="image" class="image"></el-image>
-			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)"></el-image>
+			<el-image :src="image" class="image" lazy></el-image>
+			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)" lazy></el-image>
 		</v-touch>
 		<div id="icon-group">
 			<i class="el-icon-arrow-down"></i>
@@ -86,17 +86,17 @@
                 })
             }
         },
-        mounted() {
-            document.querySelector('#main').setAttribute('style', 'overflow: hidden; height: 100vh;')
-             // 判断页面是否加载完成
-            this.timer = setInterval(() => {
-                if (document.readyState === 'complete') {
-                    document.querySelector('#main').setAttribute('style', 'overflow: auto; height: auto')
-                    this.loading = false
-                    window.clearInterval(this.timer)
-                }
-            }, 1000)
-        },
+        // mounted() {
+        //     document.querySelector('#main').setAttribute('style', 'overflow: hidden; height: 100vh;')
+        //      // 判断页面是否加载完成
+        //     this.timer = setInterval(() => {
+        //         if (document.readyState === 'complete') {
+        //             document.querySelector('#main').setAttribute('style', 'overflow: auto; height: auto')
+        //             this.loading = false
+        //             window.clearInterval(this.timer)
+        //         }
+        //     }, 1000)
+        // },
 		methods: {
 			handleSwipeup(index) {
 				if(index === this.imageList.length + 1) {
