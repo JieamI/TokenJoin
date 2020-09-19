@@ -25,8 +25,8 @@
 			:key="(index + 2)" 
 			@swipeup="handleSwipeup(index + 2)" 
 			@swipedown="handleSwipedown(index + 2)">
-			<el-image :src="image" class="image" lazy></el-image>
-			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)" lazy></el-image>
+			<el-image :src="image" class="image"></el-image>
+			<el-image class="join-button" :src="image_join" @click="pushtoJoin(image.name)"></el-image>
 		</v-touch>
 		<div id="icon-group">
 			<i class="el-icon-arrow-down"></i>
@@ -36,18 +36,18 @@
 </template>
 
 <script>
-	import image_0 from '../../assets/token.jpg'
-	import image_1 from '../../assets/时间线.jpg'
-	import image_join from '../../assets/加入.png'
+	import image_0 from '../../../public/common/token.jpg'
+	import image_1 from '../../../public/common/时间线.jpg'
+	import image_join from '../../../public/common/加入.png'
 	import request from '../../utils/requests.js'
 	export default {
 		data() {
 			return {
-                loading: true,
-                // 用于定时下拉箭头提示
-                timeout: null,
-                // 用于判断页面是否加载完成
-                timer: null,
+				loading: true,
+				// 用于定时下拉箭头提示
+				timeout: null,
+				// 用于判断页面是否加载完成
+				timer: null,
 				image_introduce: [image_0, image_1],
 				image_join: image_join,
 				imageList: []
@@ -67,13 +67,13 @@
 			if(res.data.showingList.length) {
                 res.data.showingList.forEach((dept) => {
                     switch(dept) {
-                        case('技术部'): this.imageList.push(require('../../assets/技术部.jpg'));break;
-                        case('产品部'): this.imageList.push(require('../../assets/产品部.jpg'));break;
-                        case('人力资源部'): this.imageList.push(require('../../assets/人力资源部.jpg'));break;
-                        case('设计部'): this.imageList.push(require('../../assets/设计部.jpg'));break;
-                        case('新媒体运营'): this.imageList.push(require('../../assets/新媒体运营.jpg'));break;
-                        case('产品运营'): this.imageList.push(require('../../assets/产品运营.jpg'));break;
-                        case('杂志部'): this.imageList.push(require('../../assets/杂志部.jpg'));break;
+                        case('技术部'): this.imageList.push(require('../../../public/common/技术部.jpg'));break;
+                        case('产品部'): this.imageList.push(require('../../../public/common/产品部.jpg'));break;
+                        case('人力资源部'): this.imageList.push(require('../../../public/common/人力资源部.jpg'));break;
+                        case('设计部'): this.imageList.push(require('../../../public/common/设计部.jpg'));break;
+                        case('新媒体运营'): this.imageList.push(require('../../../public/common/新媒体运营.jpg'));break;
+                        case('产品运营'): this.imageList.push(require('../../../public/common/产品运营.jpg'));break;
+                        case('杂志部'): this.imageList.push(require('../../../public/common/杂志部.jpg'));break;
                     }
                 })
 			}else {
