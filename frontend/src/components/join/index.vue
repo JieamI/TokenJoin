@@ -43,7 +43,7 @@
 	export default {
 		data() {
 			return {
-				loading: false,
+				loading: true,
 				// 用于定时下拉箭头提示
 				timeout: null,
 				// 用于判断页面是否加载完成
@@ -86,17 +86,17 @@
                 })
             }
         },
-        // mounted() {
-        //     document.querySelector('#main').setAttribute('style', 'overflow: hidden; height: 100vh;')
-        //      // 判断页面是否加载完成
-        //     this.timer = setInterval(() => {
-        //         if (document.readyState === 'complete') {
-        //             document.querySelector('#main').setAttribute('style', 'overflow: auto; height: auto')
-        //             this.loading = false
-        //             window.clearInterval(this.timer)
-        //         }
-        //     }, 1000)
-        // },
+        mounted() {
+            document.querySelector('#main').setAttribute('style', 'overflow: hidden; height: 100vh;')
+             // 判断页面是否加载完成
+            this.timer = setInterval(() => {
+                if (document.readyState === 'complete') {
+                    document.querySelector('#main').setAttribute('style', 'overflow: auto; height: auto')
+                    this.loading = false
+                    window.clearInterval(this.timer)
+                }
+            }, 1000)
+        },
 		methods: {
 			handleSwipeup(index) {
 				if(index === this.imageList.length + 1) {
