@@ -43,7 +43,7 @@
 	export default {
 		data() {
 			return {
-				loading: true,
+				loading: false,
 				// 用于定时下拉箭头提示
 				timeout: null,
 				// 用于判断页面是否加载完成
