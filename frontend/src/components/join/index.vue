@@ -7,7 +7,7 @@
 			class="wrapper"
 			@swipeup="handleSwipeup(0)" 
 			@swipedown="handleSwipedown(0)">
-			<el-image :src="image_introduce[0]" class="image"></el-image>
+			<el-image src="https://join-static.wutnews.com/public/common/token.jpg" class="image"></el-image>
 			<el-button type="primary" @click="pushtoJoin"></el-button>
 		</v-touch>
 		<v-touch
@@ -15,7 +15,7 @@
 			class="wrapper"
 			@swipeup="handleSwipeup(1)" 
 			@swipedown="handleSwipedown(1)">
-			<el-image :src="image_introduce[1]" class="image"></el-image>
+			<el-image src="https://join-static.wutnews.com/public/common/时间线.jpg" class="image"></el-image>
 		</v-touch>
 		<!-- 部门介绍部分 -->
 		<v-touch 
@@ -65,17 +65,17 @@
 				methods: 'get',
 			})
 			if(res.data.showingList.length) {
-                res.data.showingList.forEach((dept) => {
-                    switch(dept) {
-                        case('技术部'): this.imageList.push(require('../../../public/common/技术部.jpg'));break;
-                        case('产品部'): this.imageList.push(require('../../../public/common/产品部.jpg'));break;
-                        case('人力资源部'): this.imageList.push(require('../../../public/common/人力资源部.jpg'));break;
-                        case('设计部'): this.imageList.push(require('../../../public/common/设计部.jpg'));break;
-                        case('新媒体运营'): this.imageList.push(require('../../../public/common/新媒体运营.jpg'));break;
-                        case('产品运营'): this.imageList.push(require('../../../public/common/产品运营.jpg'));break;
-                        case('杂志部'): this.imageList.push(require('../../../public/common/杂志部.jpg'));break;
-                    }
-                })
+				res.data.showingList.forEach((dept) => {
+					switch(dept) {
+						case('技术部'): this.imageList.push('https://join-static.wutnews.com/public/common/技术部.jpg');break;
+						case('产品部'): this.imageList.push('https://join-static.wutnews.com/public/common/产品部.jpg');break;
+						case('人力资源部'): this.imageList.push('https://join-static.wutnews.com/public/common/人力资源部.jpg');break;
+						case('设计部'): this.imageList.push('https://join-static.wutnews.com/public/common/设计部.jpg');break;
+						case('新媒体运营'): this.imageList.push('https://join-static.wutnews.com/public/common/新媒体运营.jpg');break;
+						case('产品运营'): this.imageList.push('https://join-static.wutnews.com/public/common/产品运营.jpg');break;
+						case('杂志部'): this.imageList.push('https://join-static.wutnews.com/public/common/杂志部.jpg');break;
+					}
+				})
 			}else {
                 // 没有一个部门处于展示状态
                 this.$message({
