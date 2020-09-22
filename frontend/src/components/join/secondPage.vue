@@ -56,7 +56,7 @@
 				if(!value) {
 					return callback(new Error('学号不能为空'))
 				}
-				var reg = /^012(15|16|17|18|19|20)(\d){8}$/
+				var reg = /^\d{13}$/
 				if(!reg.test(value)) {
 					return callback(new Error('学号不合法'))
 				}
