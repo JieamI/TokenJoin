@@ -77,6 +77,7 @@ const dormitoryList = [
 		{label:"海虹5栋",value:"海虹5栋"},
 		{label:"海虹6栋",value:"海虹6栋"},
 		{label:"海虹7栋",value:"海虹7栋"},
+		{label:"余区16舍",value:"余区16舍"},
 		{label:"老1栋",value:"老1栋"},
 		{label:"老2栋",value:"老2栋"},
 		{label:"老3栋",value:"老3栋"},
