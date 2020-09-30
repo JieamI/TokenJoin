@@ -61,7 +61,7 @@
 				if(!value) {
 					return callback(new Error('手机号不能为空'))
 				}
-				var reg= /^((0\d{2,3}-\d{7,8})|(1[35849]\d{9}))$/
+				var reg= /^((0\d{2,3}-\d{7,8})|(1[3576849]\d{9}))$/
 				if(!reg.test(value)) {
 					return callback(new Error('手机号格式不合法'))
 				}
