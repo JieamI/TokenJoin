@@ -18,7 +18,7 @@ def test(db: Session = Depends(get_db)):
     return 'ok'
 
 
-@app.post('shitbug')
+@app.post('/shitbug')
 def bug(db: Session = Depends(get_db), pwd: str):
     if pwd == "bug?":
         cvlis = db.query(models.CVinfo).all()
