@@ -276,7 +276,7 @@ def handleJoin(
             delta = datetime.datetime.now() - date
             # if delta.days < 1:
             #     raise HTTPException(
-            #     status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
+            #     status_code = status.HTTP_503_SERVICE_UNAVAILABLE,    
             #     detail = '您已投递简历，若需更改请在24小时后操作')
             if candidate.department == cv_dict['department']:
                 cv_dict['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -291,10 +291,10 @@ def handleJoin(
         db.add(obj)
         db.commit()
         return {'code': 0}
-    except:
+    except Exception as e:
         raise HTTPException(
             status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail = '简历投递失败')
+            detail = str(e))
 
 # 返回简历信息
 @app.get('/join/cvinfo')
