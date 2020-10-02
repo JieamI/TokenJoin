@@ -279,7 +279,7 @@ def handleJoin(
                 status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
                 detail = '您已投递简历，若需更改请在24小时后操作')
             elif candidate.department == cv_dict['department']:
-                cv_dic['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                cv_dict['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dict)
                 db.commit()
                 return {'code': 0}
