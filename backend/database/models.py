@@ -68,6 +68,7 @@ class CVinfo(Base):
         '技术部', '设计部', '产品部', '产品运营', '新媒体运营', '人力资源部', '杂志部'
         ), 
         ForeignKey('department.Name'),
+        primary_key = True, 
         nullable = False)
     sign = Column(Boolean, default = False)
     state = Column(Enum('未审核', '简历通过', '笔试完成', '面试完成', '已录取', '未录取'), default = '未审核')

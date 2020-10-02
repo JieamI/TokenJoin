@@ -267,30 +267,25 @@ def handleJoin(
     cv: schemas.CVinfo, 
     db: Session = Depends(get_db)
     ):
-    candidate = db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).first()
+    cv_dict = cv.dict()
+    candidates = db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).all()
     # 如果投递者信息已在库，则判断两次投递时间间隔是否超过24小时，若未超过则不允许投递
-    if candidate:
-        date = datetime.datetime.strptime(candidate.time, '%Y-%m-%d %H:%M:%S')
-        delta = datetime.datetime.now() - date
-        if delta.days < 1:
-            raise HTTPException(
-            status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail = '您已投递简历，若需更改请在24小时后操作')
-        else:
-            cv_dic = cv.dict()
-            # 如果更新简历并没更改投递部门
-            if candidate.department == cv_dic['department']:
+    if candidates:
+        for candidate in candidates:
+            date = datetime.datetime.strptime(candidate.time, '%Y-%m-%d %H:%M:%S')
+            delta = datetime.datetime.now() - date
+            if delta.days < 1:
+                raise HTTPException(
+                status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail = '您已投递简历，若需更改请在24小时后操作')
+            elif candidate.department == cv_dict['department']:
                 cv_dic['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dic)
+                db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dict)
                 db.commit()
                 return {'code': 0}
-            # 如果更换了部门投递，则删除原来的简历记录
-            else:
-                db.delete(candidate)
-                db.commit()
+    # 如果数据库不存在该简历记录/更新的简历投递部门为新的部门
     try:
         # 默认填写comment， mysql 不支持在 text/blob 类型设置 default value
-        cv_dict = cv.dict()
         cv_dict["comment"] = "{}"
         obj = models.CVinfo(**cv_dict)
         db.add(obj)
