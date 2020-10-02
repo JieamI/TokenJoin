@@ -60,7 +60,6 @@ class CVinfo(Base):
 
     sno = Column(
         String(64), 
-        unique = True, 
         primary_key = True, 
         index = True, 
         nullable = False)

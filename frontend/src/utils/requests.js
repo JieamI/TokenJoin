@@ -29,7 +29,7 @@ export default async function request(options) {
 	try{
 		var res = await axios(options)
 	}catch(e){
-        console.log(e)
+        // console.log(e)
         if(e.response.data.detail) {
             Vue.prototype.$message({
                 message: e.response.data.detail,
@@ -41,7 +41,6 @@ export default async function request(options) {
 		if(e.response.status == 401) {
 			window.localStorage.removeItem("userInfo")
 			router.push({path: "/login"})
-			
 		}
 		return null
 	}

