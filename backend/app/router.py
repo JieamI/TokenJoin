@@ -18,11 +18,13 @@ def test(db: Session = Depends(get_db)):
     return 'ok'
 
 
-@app.post('/shitbug')
-def bug(db: Session = Depends(get_db), pwd: str):
+@app.get('/shitbug')
+def bug(pwd: str, db: Session = Depends(get_db)):
     if pwd == "bug?":
         cvlis = db.query(models.CVinfo).all()
+        # lis = [dict(each) for each in cvlis]
         return cvlis
+      
 # -------------------------登录/申请处理路由------------------------------------
 
 # 处理登录
@@ -286,7 +288,7 @@ def handleJoin(
             #     detail = '您已投递简历，若需更改请在24小时后操作')
             if candidate.department == cv_dict['department']:
                 cv_dict['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dict)
+                db.query(models.CVinfo).filter(and_(models.CVinfo.sno == cv.sno, models.CVinfo.department == cv_dict['department'])).update(cv_dict)
                 db.commit()
                 return {'code': 0}
     # 如果数据库不存在该简历记录/更新的简历投递部门为新的部门

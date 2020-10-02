@@ -6,7 +6,8 @@ import os
 
 
 SQLALCHEMY_DATABASE_URL = "mysql+pymysql://{}:{}@{}/{}".format(os.getenv("TOKEN_JOIN_USER"), os.getenv("TOKEN_JOIN_PASSWORD"), os.getenv("TOKEN_JOIN_HOST"), os.getenv("TOKEN_JOIN_DB"))
-  
+
+# SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
 )
