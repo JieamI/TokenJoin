@@ -16,20 +16,19 @@ export default async function request(options) {
 		return config
 	})
 	
-	// if(!window.$source) {
-	// 	// 首次请求
-	// 	window.$source = axios.CancelToken.source()
-	// }else {
-	// 	// 取消上一次请求
-	// 	window.$source.cancel()
-	// 	window.$source = axios.CancelToken.source()
-	// 	options.cancelToken = window.$source.token
-	// }
+	if(!window.$source) {
+		// 首次请求
+		window.$source = axios.CancelToken.source()
+	}else {
+		// 取消上一次请求
+		window.$source.cancel()
+		window.$source = axios.CancelToken.source()
+		options.cancelToken = window.$source.token
+	}
 	
 	try{
 		var res = await axios(options)
 	}catch(e){
-        // console.log(e)
         if(e.response.data.detail) {
             Vue.prototype.$message({
                 message: e.response.data.detail,

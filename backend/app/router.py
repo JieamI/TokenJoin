@@ -16,14 +16,6 @@ import uuid
 @app.get('/test')
 def test(db: Session = Depends(get_db)):
     return 'ok'
-
-
-@app.get('/shitbug')
-def bug(pwd: str, db: Session = Depends(get_db)):
-    if pwd == "bug?":
-        cvlis = db.query(models.CVinfo).all()
-        # lis = [dict(each) for each in cvlis]
-        return cvlis
       
 # -------------------------登录/申请处理路由------------------------------------
 
@@ -282,11 +274,11 @@ def handleJoin(
         for candidate in candidates:
             date = datetime.datetime.strptime(candidate.time, '%Y-%m-%d %H:%M:%S')
             delta = datetime.datetime.now() - date
-            # if delta.days < 1:
-            #     raise HTTPException(
-            #     status_code = status.HTTP_503_SERVICE_UNAVAILABLE,    
-            #     detail = '您已投递简历，若需更改请在24小时后操作')
-            if candidate.department == cv_dict['department']:
+            if delta.days < 1:
+                raise HTTPException(
+                status_code = status.HTTP_503_SERVICE_UNAVAILABLE,    
+                detail = '您已投递简历，若需更改请在24小时后操作')
+            elif candidate.department == cv_dict['department']:
                 cv_dict['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 db.query(models.CVinfo).filter(and_(models.CVinfo.sno == cv.sno, models.CVinfo.department == cv_dict['department'])).update(cv_dict)
                 db.commit()
@@ -299,10 +291,10 @@ def handleJoin(
         db.add(obj)
         db.commit()
         return {'code': 0}
-    except Exception as e:
+    except:
         raise HTTPException(
             status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail = str(e))
+            detail = "简历投递失败")
 
 # 返回简历信息
 @app.get('/join/cvinfo')
