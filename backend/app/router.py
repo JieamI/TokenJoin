@@ -274,11 +274,11 @@ def handleJoin(
         for candidate in candidates:
             date = datetime.datetime.strptime(candidate.time, '%Y-%m-%d %H:%M:%S')
             delta = datetime.datetime.now() - date
-            if delta.days < 1:
-                raise HTTPException(
-                status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail = '您已投递简历，若需更改请在24小时后操作')
-            elif candidate.department == cv_dict['department']:
+            # if delta.days < 1:
+            #     raise HTTPException(
+            #     status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
+            #     detail = '您已投递简历，若需更改请在24小时后操作')
+            if candidate.department == cv_dict['department']:
                 cv_dict['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dict)
                 db.commit()
