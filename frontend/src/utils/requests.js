@@ -29,11 +29,13 @@ export default async function request(options) {
 	try{
 		var res = await axios(options)
 	}catch(e){
-		Vue.prototype.$message({
-			message: e.response.data.detail,
-			type: 'error',
-			center: true
-		})
+        if(e.response.data.detail) {
+            Vue.prototype.$message({
+                message: e.response.data.detail,
+                type: 'error',
+                center: true
+            })
+        }
 		// 如果错误码是未授权，则清除本地用户信息，回到登录界面
 		if(e.response.status == 401) {
 			window.localStorage.removeItem("userInfo")

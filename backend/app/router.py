@@ -278,10 +278,16 @@ def handleJoin(
             detail = '您已投递简历，若需更改请在24小时后操作')
         else:
             cv_dic = cv.dict()
-            cv_dic['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dic)
-            db.commit()
-            return {'code': 0}
+            # 如果更新简历并没更改投递部门
+            if candidate.department == cv_dic['department']:
+                cv_dic['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                db.query(models.CVinfo).filter(models.CVinfo.sno == cv.sno).update(cv_dic)
+                db.commit()
+                return {'code': 0}
+            # 如果更换了部门投递，则删除原来的简历记录
+            else:
+                db.delete(candidate)
+                db.commit()
     try:
         # 默认填写comment， mysql 不支持在 text/blob 类型设置 default value
         cv_dict = cv.dict()
