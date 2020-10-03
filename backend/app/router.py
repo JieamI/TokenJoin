@@ -315,7 +315,7 @@ def handleCvupdate(
     current_user: models.User = Depends(validate_auth),
     db: Session = Depends(get_db)
     ):
-    cv = db.query(models.CVinfo).filter(models.CVinfo.sno == data.sno).first()
+    cv = db.query(models.CVinfo).filter(and_(models.CVinfo.sno == data.sno, models.CVinfo.department == current_user.Department_name)).first()
     if not cv:
         raise HTTPException(
         status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -350,7 +350,7 @@ def setCVComment(
     current_user: models.User = Depends(get_user),
     db: Session = Depends(get_db)
     ):
-    cv = db.query(models.CVinfo).filter(models.CVinfo.sno == data.sno).first()
+    cv = db.query(models.CVinfo).filter(and_(models.CVinfo.sno == data.sno, models.CVinfo.department == current_user.Department_name)).first()
     if not cv:
         raise HTTPException(
         status_code = status.HTTP_503_SERVICE_UNAVAILABLE,
