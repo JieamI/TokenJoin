@@ -52,7 +52,7 @@
 			class="cvinfo-dialog"
 			title="详细信息"
 			:visible.sync="dialogCvinfoVisible"
-			width="650px"
+			width="700px"
 			@closed="comment_select = ''"
 			center>
 		<el-card class="cvinfo-wrapper">
@@ -424,9 +424,10 @@
 		height 99%
 		// 简历信息对话框样式
 		.cvinfo-dialog
+			// height 500px
 			overflow hidden
 			.cvinfo-wrapper
-				height 500px
+				height 560px
 				overflow-y auto
 				.el-form-item
 					color gray
@@ -466,6 +467,5 @@
 		.comment-dialog >>> .el-button
 			width 120px
 		.cvinfo-dialog >>> .el-dialog
-			margin-top 8vh !important
-			// background-color #545C64
+			margin-top 2vh !important
 </style>
