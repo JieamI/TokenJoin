@@ -52,7 +52,7 @@
 			class="cvinfo-dialog"
 			title="详细信息"
 			:visible.sync="dialogCvinfoVisible"
-			width="500px"
+			width="650px"
 			@closed="comment_select = ''"
 			center>
 		<el-card class="cvinfo-wrapper">
@@ -71,13 +71,13 @@
 				<el-form-item label="QQ:">{{ cvinfoDialog.qq }}</el-form-item>
 				<el-form-item label="邮箱:">{{ cvinfoDialog.mail }}</el-form-item>
 				<el-form-item label="个人经历:">
-					<el-input type="textarea" resize="none" rows="4" :value="cvinfoDialog.experience" readonly></el-input>
+					<el-input type="textarea" resize="none" rows="6" :value="cvinfoDialog.experience" readonly></el-input>
 				</el-form-item>
 				<el-form-item label="自我介绍:">
-					<el-input type="textarea" resize="none" rows="4" :value="cvinfoDialog.introduce" readonly></el-input>
+					<el-input type="textarea" resize="none" rows="6" :value="cvinfoDialog.introduce" readonly></el-input>
 				</el-form-item>
 				<el-form-item label="加入原因:">
-					<el-input type="textarea" resize="none" rows="4" :value="cvinfoDialog.reason" readonly></el-input>
+					<el-input type="textarea" resize="none" rows="6" :value="cvinfoDialog.reason" readonly></el-input>
 				</el-form-item>
 				<el-form-item label="面试评价:">
 					<el-select v-model="comment_select" placeholder="请选择评价人" clearable>
@@ -423,16 +423,13 @@
 	.el-card
 		height 99%
 		// 简历信息对话框样式
-		.cvinfo-wrapper
-			height 450px
-			overflow-y auto
-			.el-form-item
-				// background-color #42B983
-				// font-family "microsoft yahei"
-				// font-size 100px
-				// margin-left 10px
-				color gray
-				// font-weight 500
+		.cvinfo-dialog
+			overflow hidden
+			.cvinfo-wrapper
+				height 500px
+				overflow-y auto
+				.el-form-item
+					color gray
 		// 邮件发送对话框样式
 		.el-form
 			padding 0 50px
@@ -468,4 +465,7 @@
 			padding 10px 35px
 		.comment-dialog >>> .el-button
 			width 120px
+		.cvinfo-dialog >>> .el-dialog
+			margin-top 8vh !important
+			// background-color #545C64
 </style>

@@ -39,10 +39,10 @@
 				if(!value) {
 					return callback(new Error('邮箱不能为空'))
 				}
-				var reg=/^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/
-				if(!reg.test(value)) {
-					return callback(new Error('邮箱格式不合法'))
-				}
+				// var reg=/^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/
+				// if(!reg.test(value)) {
+				// 	return callback(new Error('邮箱格式不合法'))
+				// }
 				return callback()
 			}
 			// QQ号验证
