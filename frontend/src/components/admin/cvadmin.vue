@@ -101,7 +101,7 @@
 		<el-table 
 			class="table"
 			:data="tableData"
-			height="480px"
+			height=1024
 			@selection-change="handleSelectionChange" stripe>
 			<el-table-column type="selection" width="50" align="center">
 			</el-table-column>
