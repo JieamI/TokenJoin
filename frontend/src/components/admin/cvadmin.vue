@@ -101,7 +101,7 @@
 		<el-table 
 			class="table"
 			:data="tableData"
-			height=800
+			height=1000
 			@selection-change="handleSelectionChange" stripe>
 			<el-table-column type="selection" width="50" align="center">
 			</el-table-column>
@@ -422,6 +422,7 @@
 <style lang="stylus" scoped>
 	.el-card
 		height 99%
+		overflow auto
 		// 简历信息对话框样式
 		.cvinfo-dialog
 			// height 500px
