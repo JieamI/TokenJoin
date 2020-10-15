@@ -130,7 +130,7 @@
 <style lang="stylus" scoped>
 	.container-wrap
 		height 100%
-		// width 100%
+		width 100%
 		background-color ghostwhite
 		.el-aside
 			background-color #545c64
