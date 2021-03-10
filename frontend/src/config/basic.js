@@ -1,6 +1,6 @@
 let frontDomain = process.env.TOKEN_FRONT_DOMAIN ? process.env.TOKNE_FRONT_DOMAIN : "https://join.itoken.team"
 // let backendDomain = process.env.TOKEN_BACKEND_DOMAIN ? process.env.TOKEN_BACKEND_DOMAIN : "https://join.itoken.team/api"
-let backendDomain = process.env.TOKEN_BACKEND_DOMAIN ? process.env.TOKEN_BACKEND_DOMAIN : "http://apitoken.vaiwan.com/api"
+let backendDomain = process.env.TOKEN_BACKEND_DOMAIN ? process.env.TOKEN_BACKEND_DOMAIN : "https://apitoken.vaiwan.com/api"
 const Config = {
 	//前端的域名（必须是域名，不能是ip:port形式），注意域名最后不要加斜杠
 	frontDomain: frontDomain,
