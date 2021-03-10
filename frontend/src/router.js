@@ -31,7 +31,7 @@ let router =  new VueRouter({
 		props: true
 	},{
 		path: '/join*',
-		redirect: '/join/index'
+		redirect: '/join/apply'
 	},{
 		path: '/admin',
         component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),

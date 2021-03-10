@@ -67,9 +67,9 @@
 				let timestamp = JSON.parse(window.localStorage.getItem('timestamp'))
 				// 如果本地存储存入timestamp则判断两次提交时间间隔是否超过一天,超过一天则不允许提交
 				if(timestamp) {
-					if((Date.parse(new Date()) - timestamp) / (24 * 60 * 60 * 1000) < 1) {
+					if((Date.parse(new Date()) - timestamp) / (60 * 60 * 1000) < 1) {
 						this.$message({
-							message: '您已投递简历，若需更改请在24小时后操作',
+							message: '您已投递简历，若需更改请在1小时后操作',
 							type: 'warning',
 							center: true
 						})
@@ -79,24 +79,30 @@
 				// 将form的hometown和dormitory属性转化为字符串: array >>> string
 				this.form.hometown = this.form.hometown.join('/')
 				this.form.dormitory = this.form.dormitory.join('/')
-				let res = await request({
-					url: '/join/cv',
+				try {
+                    let res = await request({
+					url: '/cv/apply',
 					method: 'post',
 					data: this.form
-				})
-				if(res.data.code === 0) {
-					this.$message({
-						message: '您的简历投递成功',
-						type: 'success',
-						center: true
-					})
-					window.localStorage.setItem('timestamp', JSON.stringify(Date.parse(new Date())))
-					// 提交后再将籍贯和寝室转化为级联选择器组件所支持的数组形式,并重新存入本地存储
-					this.form.hometown = this.form.hometown.split('/')
-					this.form.dormitory = this.form.dormitory.split('/')
-					window.localStorage.setItem('form', JSON.stringify(this.form))
-					this.$router.push({path: '/join/index'})
-				}
+                    })
+                
+                    if(res.data.code === 0) {
+                        this.$message({
+                            message: '您的简历投递成功',
+                            type: 'success',
+                            center: true
+                        })
+                    }
+                }finally {
+                    window.localStorage.setItem('timestamp', JSON.stringify(Date.parse(new Date())))
+                    // 提交后再将籍贯和寝室转化为级联选择器组件所支持的数组形式,并重新存入本地存储
+                    this.form.hometown = this.form.hometown.split('/')
+                    this.form.dormitory = this.form.dormitory.split('/')
+                    window.localStorage.setItem('form', JSON.stringify(this.form))
+                    // this.$router.push({path: '/join/index'})
+                }
+                
+                
 			}
 		},
 		mounted() {

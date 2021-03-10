@@ -1,62 +1,62 @@
 <template>
 	<div>
-			<div class="title">Token团队招新简历投递</div>
-			<el-steps :active="0" finish-status="success" :space="100" align-center>
-				<el-step title="基础信息"></el-step>
-				<el-step title="学生信息"></el-step>
-				<el-step title="联系方式"></el-step>
-				<el-step title="申请信息"></el-step>
-			</el-steps>
-			<el-form 
-				label-position="top" 
-				size="small"
-				ref="form"
-				:model="$parent.form"
-				:rules="rules" 
-				status-icon>
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="$parent.form.name" clearable></el-input>
-				</el-form-item>
-				<el-form-item label="性别" prop="sex">
-					<el-select v-model="$parent.form.sex" placeholder="请选择" clearable>
-						<el-option label="男" value="男"></el-option>
-						<el-option label="女" value="女"></el-option>
-					</el-select>
-				</el-form-item>
-				<el-form-item label="出生日期" prop="birthday">
-					<el-date-picker
-						v-model="$parent.form.birthday"
-						type="date"
-						editable
-						placeholder="选择日期"
-						:default-value="new Date().setFullYear(2000,0,1)"
-						value-format="yyyy年MM月dd日"
-						:picker-options="{
-							disabledDate: (time) => {
-							return time.getTime() > Date.now()
-						}}" 
-						clearable>
-					</el-date-picker>
-				</el-form-item>
-				<el-form-item label="籍贯" prop="hometown">
-					<el-cascader 
-					v-model="$parent.form.hometown" 
-					:options="nativeList"
-					:props="{value: 'label'}"
-					placeholder="请选择" 
-					clearable>
-					</el-cascader>
-				</el-form-item>
-				<el-form-item label="民族" prop="nation">
-					<el-select v-model="$parent.form.nation" placeholder="请选择" clearable>
-						<el-option v-for="nation in nationList" :key="nation.value" :label="nation.label" :value="nation.value"></el-option>
-					</el-select>
-				</el-form-item>
-			</el-form>
-			<div class="button-group">
-				<el-button type="info" disabled>上一步</el-button>
-				<el-button type="primary" @click="handleNext">下一步</el-button>
-			</div>
+        <div class="title">Token团队招新简历投递</div>
+        <el-steps :active="0" finish-status="success" :space="100" align-center>
+            <el-step title="基础信息"></el-step>
+            <el-step title="学生信息"></el-step>
+            <el-step title="联系方式"></el-step>
+            <el-step title="申请信息"></el-step>
+        </el-steps>
+        <el-form 
+            label-position="top" 
+            size="small"
+            ref="form"
+            :model="$parent.form"
+            :rules="rules" 
+            status-icon>
+            <el-form-item label="姓名" prop="name">
+                <el-input v-model="$parent.form.name" clearable></el-input>
+            </el-form-item>
+            <el-form-item label="性别" prop="sex">
+                <el-select v-model="$parent.form.sex" placeholder="请选择" clearable>
+                    <el-option label="男" value="男"></el-option>
+                    <el-option label="女" value="女"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="出生日期" prop="birthday">
+                <el-date-picker
+                    v-model="$parent.form.birthday"
+                    type="date"
+                    editable
+                    placeholder="选择日期"
+                    :default-value="new Date().setFullYear(2000,0,1)"
+                    value-format="yyyy年MM月dd日"
+                    :picker-options="{
+                        disabledDate: (time) => {
+                        return time.getTime() > Date.now()
+                    }}" 
+                    clearable>
+                </el-date-picker>
+            </el-form-item>
+            <el-form-item label="籍贯" prop="hometown">
+                <el-cascader 
+                v-model="$parent.form.hometown" 
+                :options="nativeList"
+                :props="{value: 'label'}"
+                placeholder="请选择" 
+                clearable>
+                </el-cascader>
+            </el-form-item>
+            <el-form-item label="民族" prop="nation">
+                <el-select v-model="$parent.form.nation" placeholder="请选择" clearable>
+                    <el-option v-for="nation in nationList" :key="nation.value" :label="nation.label" :value="nation.value"></el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <div class="button-group">
+            <el-button type="info" disabled>上一步</el-button>
+            <el-button type="primary" @click="handleNext">下一步</el-button>
+        </div>
 	</div>
 	
 </template>

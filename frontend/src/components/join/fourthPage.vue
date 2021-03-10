@@ -60,15 +60,19 @@
 		},
 		async created() {
 			let res = await request({
-				url: '/getshow',
+				url: '/dept/getshow',
 				method: 'get',
 			})
 			// 未处于显示状态的部门不能显示在部门下拉框中
-			if(res.data.showingList.length) {
-				res.data.showingList.forEach((dept) => {
-					this.departmentList.push({title: dept, val: dept})
-				})
-			}
+            if(res.data.code === 0) {
+                let resList = res.data.data
+                if(resList.length) {
+                    resList.forEach(dept => {
+                        this.departmentList.push({title: dept, val: dept})
+                    })
+                }
+            }
+           
 		},
 		methods: {
 			handleSubmit() {
